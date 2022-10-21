@@ -1,5 +1,11 @@
 /* exercise_04_02.c */
 
+/*********************************************************************
+Write a program like cp that, when used to copy a regular file that
+contains holes (sequences of null bytes), also creates corresponding
+holes in the target file.
+*********************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -23,8 +29,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    /* Open input and output files */
-
     input_fd = open(argv[1], O_RDONLY);
     if (input_fd == -1) {
         perror("open (input file)");
@@ -40,27 +44,25 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    /* Transfer data until we encounter end of input or an error */
-
     while ((numRead = read(input_fd, buf, BUF_SIZE)) > 0) {
         if (write(ouput_fd, buf, numRead) != numRead) {
             perror("write");
             break;
         }
     }
+
     if (numRead == -1) {
         perror("read");
         exit(EXIT_FAILURE);
     }
 
-    /* Close files */
-    
     if (close(input_fd) == -1) {
-        perror("close input");
+        perror("close (input file)");
         exit(EXIT_FAILURE);
     }
+
     if (close(ouput_fd) == -1) {
-        perror("close output");
+        perror("close (output file)");
         exit(EXIT_FAILURE);
     }
 

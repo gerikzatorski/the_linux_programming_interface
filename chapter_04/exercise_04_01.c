@@ -1,5 +1,17 @@
 /* exercise_04_01.c */
 
+/*********************************************************************
+The tee command reads its standard input until end-of-file, writing a
+copy of the input to standard output and to the file named in its
+command-line argument. (We show an example of the use of this command
+when we discuss FIFOs in Section 44.7.) Implement tee using I/O system
+calls. By default, tee overwrites any existing file with the given
+name. Implement the –a command-line option (tee –a file), which causes
+tee to append text to the end of a file if it already exists. (Refer
+to Appendix B for a description of the getopt() function, which can be
+used to parse command-line options.)
+*********************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -18,8 +30,6 @@ int main(int argc, char *argv[])
     ssize_t num_read;
     char buf[BUF_SIZE];
     
-    /* Parse for 'append' option */
-
     while ((opt = getopt (argc, argv, ":a")) != -1) {
         switch (opt) {
             case 'a':
@@ -36,8 +46,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    /* Open or create new file */
-
     if (a_flag)
         output_flags = O_CREAT | O_WRONLY | O_APPEND;
     else
@@ -50,8 +58,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    /* Copy stdin to file and stdout */
-
     while ((num_read = read(STDIN_FILENO, buf, BUF_SIZE)) > 0) {
         if (write(output_fd, buf, num_read) != num_read) {
             perror("write (to file)");
@@ -63,8 +69,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    /* Close files */
-    
     if (num_read == -1) {
         perror("read");
         exit(EXIT_FAILURE);
