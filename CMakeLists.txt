@@ -20,3 +20,5 @@ add_executable(exercise_05_03 chapter_05/exercise_05_03.c)
 add_executable(exercise_05_05 chapter_05/exercise_05_05.c)
 add_executable(exercise_05_07 chapter_05/exercise_05_07.c)
 
+add_executable(exercise_06_02 chapter_06/exercise_06_02.c)
+add_executable(exercise_06_03 chapter_06/exercise_06_03.c)
