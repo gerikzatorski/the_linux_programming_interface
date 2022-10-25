@@ -7,6 +7,7 @@ function that has already returned.
 
 #include <setjmp.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static jmp_buf env;
 

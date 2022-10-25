@@ -42,7 +42,7 @@ int unsetenvcopy(const char *name)
     /* putenv() removes variable when argument doesn't contain '=' */
 
     #ifdef __GNUC__
-    putenv(name);
+    putenv((char *) name);
     return 0;
     #else
     #error Only GNU C solution implemented.
