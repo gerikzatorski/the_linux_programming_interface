@@ -22,3 +22,8 @@ add_executable(exercise_05_07 chapter_05/exercise_05_07.c)
 
 add_executable(exercise_06_02 chapter_06/exercise_06_02.c)
 add_executable(exercise_06_03 chapter_06/exercise_06_03.c)
+
+add_executable(exercise_07_01 chapter_07/exercise_07_01.c)
+target_include_directories(exercise_07_01 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_07_01 PRIVATE ${TLPI_LIBS})
+
