@@ -27,3 +27,5 @@ add_executable(exercise_07_01 chapter_07/exercise_07_01.c)
 target_include_directories(exercise_07_01 PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_07_01 PRIVATE ${TLPI_LIBS})
 
+add_executable(exercise_08_01 chapter_08/exercise_08_01.c)
+add_executable(exercise_08_02 chapter_08/exercise_08_02.c)
