@@ -46,3 +46,5 @@ target_link_libraries(exercise_15_03 PRIVATE ${TLPI_LIBS})
 add_executable(exercise_15_04 chapter_15/exercise_15_04.c)
 add_executable(exercise_15_06 chapter_15/exercise_15_06.c)
 add_executable(exercise_15_07 chapter_15/exercise_15_07.c)
+
+add_executable(exercise_16_01 chapter_16/exercise_16_01.c)
