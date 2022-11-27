@@ -48,3 +48,6 @@ add_executable(exercise_15_06 chapter_15/exercise_15_06.c)
 add_executable(exercise_15_07 chapter_15/exercise_15_07.c)
 
 add_executable(exercise_16_01 chapter_16/exercise_16_01.c)
+
+add_executable(exercise_17_01 chapter_17/exercise_17_01.c)
+target_link_libraries(exercise_17_01 acl)
