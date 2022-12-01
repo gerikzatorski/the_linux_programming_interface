@@ -51,3 +51,11 @@ add_executable(exercise_16_01 chapter_16/exercise_16_01.c)
 
 add_executable(exercise_17_01 chapter_17/exercise_17_01.c)
 target_link_libraries(exercise_17_01 acl)
+
+add_executable(exercise_18_03 chapter_18/exercise_18_03.c)
+add_executable(exercise_18_04 chapter_18/exercise_18_04.c)
+target_include_directories(exercise_18_04 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_18_04 PRIVATE ${TLPI_LIBS})
+add_executable(exercise_18_05 chapter_18/exercise_18_05.c)
+add_executable(exercise_18_07 chapter_18/exercise_18_07.c)
+add_executable(exercise_18_09 chapter_18/exercise_18_09.c)
