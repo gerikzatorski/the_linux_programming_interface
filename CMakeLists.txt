@@ -61,3 +61,12 @@ add_executable(exercise_18_07 chapter_18/exercise_18_07.c)
 add_executable(exercise_18_09 chapter_18/exercise_18_09.c)
 
 add_executable(exercise_19_01 chapter_19/exercise_19_01.c)
+
+add_executable(exercise_20_01 chapter_20/exercise_20_01.c)
+target_include_directories(exercise_20_01 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_20_01 PRIVATE ${TLPI_LIBS})
+add_executable(exercise_20_02 chapter_20/exercise_20_02.c)
+add_executable(exercise_20_03a chapter_20/exercise_20_03a.c)
+add_executable(exercise_20_03b chapter_20/exercise_20_03b.c)
+add_executable(exercise_20_04 chapter_20/exercise_20_04.c)
+
