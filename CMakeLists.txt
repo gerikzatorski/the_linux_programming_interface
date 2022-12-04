@@ -70,3 +70,4 @@ add_executable(exercise_20_03a chapter_20/exercise_20_03a.c)
 add_executable(exercise_20_03b chapter_20/exercise_20_03b.c)
 add_executable(exercise_20_04 chapter_20/exercise_20_04.c)
 
+add_executable(exercise_21_01 chapter_21/exercise_21_01.c)
