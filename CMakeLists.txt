@@ -89,3 +89,5 @@ add_executable(exercise_24_02 chapter_24/exercise_24_02.c)
 add_executable(exercise_24_05 chapter_24/exercise_24_05.c)
 target_include_directories(exercise_24_05 PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_24_05 PRIVATE ${TLPI_LIBS})
+
+add_executable(exercise_25_01 chapter_25/exercise_25_01.c)
