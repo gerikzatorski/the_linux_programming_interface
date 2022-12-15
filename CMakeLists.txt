@@ -91,3 +91,12 @@ target_include_directories(exercise_24_05 PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_24_05 PRIVATE ${TLPI_LIBS})
 
 add_executable(exercise_25_01 chapter_25/exercise_25_01.c)
+
+add_executable(exercise_26_01 chapter_26/exercise_26_01.c)
+add_executable(exercise_26_02 chapter_26/exercise_26_02.c)
+add_executable(exercise_26_03 chapter_26/exercise_26_03.c)
+target_include_directories(exercise_26_03 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_26_03 PRIVATE ${TLPI_LIBS})
+add_executable(exercise_26_04 chapter_26/exercise_26_04.c)
+target_include_directories(exercise_26_04 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_26_04 PRIVATE ${TLPI_LIBS})
