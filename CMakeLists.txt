@@ -100,3 +100,6 @@ target_link_libraries(exercise_26_03 PRIVATE ${TLPI_LIBS})
 add_executable(exercise_26_04 chapter_26/exercise_26_04.c)
 target_include_directories(exercise_26_04 PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_26_04 PRIVATE ${TLPI_LIBS})
+
+add_executable(exercise_27_02 chapter_27/exercise_27_02.c)
+add_executable(exercise_27_06 chapter_27/exercise_27_06.c)
