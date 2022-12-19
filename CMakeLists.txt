@@ -106,3 +106,6 @@ add_executable(exercise_27_06 chapter_27/exercise_27_06.c)
 
 add_executable(exercise_28_01a chapter_28/exercise_28_01a.c)
 add_executable(exercise_28_01b chapter_28/exercise_28_01b.c)
+
+add_executable(exercise_29_01 chapter_29/exercise_29_01.c)
+target_link_libraries(exercise_29_01 PRIVATE pthread)
