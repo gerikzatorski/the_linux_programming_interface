@@ -109,3 +109,12 @@ add_executable(exercise_28_01b chapter_28/exercise_28_01b.c)
 
 add_executable(exercise_29_01 chapter_29/exercise_29_01.c)
 target_link_libraries(exercise_29_01 PRIVATE pthread)
+
+add_executable(exercise_30_01 chapter_30/exercise_30_01.c)
+target_include_directories(exercise_30_01 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_30_01 PRIVATE ${TLPI_LIBS} pthread)
+# library and pseudo tests in seperate files
+add_library(exercise_30_02_lib STATIC chapter_30/exercise_30_02.c)
+target_link_libraries(exercise_30_02_lib PRIVATE pthread)
+add_executable(exercise_30_02_tests chapter_30/exercise_30_02_tests.c)
+target_link_libraries(exercise_30_02_tests PRIVATE pthread exercise_30_02_lib)
