@@ -128,3 +128,7 @@ target_link_libraries(exercise_31_02a PRIVATE ${TLPI_LIBS} pthread)
 add_executable(exercise_31_02b chapter_31/exercise_31_02b.c)
 target_include_directories(exercise_31_02b PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_31_02b PRIVATE ${TLPI_LIBS} pthread)
+
+add_executable(exercise_33_01 chapter_33/exercise_33_01.c)
+target_include_directories(exercise_33_01 PRIVATE ${TLPI_INCLUDES})
+target_link_libraries(exercise_33_01 PRIVATE ${TLPI_LIBS} pthread)
