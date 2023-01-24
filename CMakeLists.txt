@@ -132,3 +132,13 @@ target_link_libraries(exercise_31_02b PRIVATE ${TLPI_LIBS} pthread)
 add_executable(exercise_33_01 chapter_33/exercise_33_01.c)
 target_include_directories(exercise_33_01 PRIVATE ${TLPI_INCLUDES})
 target_link_libraries(exercise_33_01 PRIVATE ${TLPI_LIBS} pthread)
+
+# Using libs error functions
+include_directories(${TLPI_INCLUDES})
+link_libraries(${TLPI_LIBS})
+
+add_executable(exercise_34_02 chapter_34/exercise_34_02.c)
+add_executable(exercise_34_03 chapter_34/exercise_34_03.c)
+add_executable(exercise_34_04 chapter_34/exercise_34_04.c)
+add_executable(exercise_34_06 chapter_34/exercise_34_06.c)
+add_executable(exercise_34_07 chapter_34/exercise_34_07.c)
