@@ -155,3 +155,6 @@ add_executable(exercise_37_01 chapter_37/exercise_37_01.c)
 
 add_executable(exercise_38_02 chapter_38/exercise_38_02.c)
 target_link_libraries(exercise_38_02 PRIVATE crypt)
+
+add_executable(exercise_39_01 chapter_39/exercise_39_01.c)
+target_link_libraries(exercise_39_01 PRIVATE cap)
