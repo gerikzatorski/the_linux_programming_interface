@@ -158,3 +158,9 @@ target_link_libraries(exercise_38_02 PRIVATE crypt)
 
 add_executable(exercise_39_01 chapter_39/exercise_39_01.c)
 target_link_libraries(exercise_39_01 PRIVATE cap)
+
+# chapter 41 exercise 1 uses gcc cli
+
+# chapter 42 exercise 1 uses gcc cli
+add_executable(exercise_42_02 chapter_42/exercise_42_02.c)
+target_link_libraries(exercise_42_02 PRIVATE dl)
