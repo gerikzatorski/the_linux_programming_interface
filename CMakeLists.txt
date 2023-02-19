@@ -164,3 +164,10 @@ target_link_libraries(exercise_39_01 PRIVATE cap)
 # chapter 42 exercise 1 uses gcc cli
 add_executable(exercise_42_02 chapter_42/exercise_42_02.c)
 target_link_libraries(exercise_42_02 PRIVATE dl)
+
+add_executable(exercise_44_01 chapter_44/exercise_44_01.c)
+add_executable(exercise_44_02 chapter_44/exercise_44_02.c)
+add_executable(exercise_44_03 chapter_44/exercise_44_03.c)
+add_executable(exercise_44_04 chapter_44/exercise_44_04.c)
+add_executable(exercise_44_06 chapter_44/exercise_44_06.c)
+add_executable(exercise_44_06_malicious chapter_44/exercise_44_06_malicious.c)
