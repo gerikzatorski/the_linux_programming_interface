@@ -171,3 +171,8 @@ add_executable(exercise_44_03 chapter_44/exercise_44_03.c)
 add_executable(exercise_44_04 chapter_44/exercise_44_04.c)
 add_executable(exercise_44_06 chapter_44/exercise_44_06.c)
 add_executable(exercise_44_06_malicious chapter_44/exercise_44_06_malicious.c)
+
+add_executable(exercise_49_01 chapter_49/exercise_49_01.c)
+add_executable(exercise_49_03a chapter_49/exercise_49_03a.c)
+add_executable(exercise_49_03b chapter_49/exercise_49_03b.c)
+add_executable(exercise_49_04 chapter_49/exercise_49_04.c)
