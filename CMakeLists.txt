@@ -176,3 +176,6 @@ add_executable(exercise_49_01 chapter_49/exercise_49_01.c)
 add_executable(exercise_49_03a chapter_49/exercise_49_03a.c)
 add_executable(exercise_49_03b chapter_49/exercise_49_03b.c)
 add_executable(exercise_49_04 chapter_49/exercise_49_04.c)
+
+add_executable(exercise_50_01 chapter_50/exercise_50_01.c)
+add_executable(exercise_50_02 chapter_50/exercise_50_02.c)
