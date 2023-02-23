@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     /* Ensure file is small enough */
     
-    fd = open(arv[1], O_RDWR | O_CREAT,
+    fd = open(argv[1], O_RDWR | O_CREAT,
               S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
     if (fd == -1)
         errExit("open");
