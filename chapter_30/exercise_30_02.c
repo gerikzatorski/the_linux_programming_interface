@@ -35,7 +35,7 @@ static int delete_by_node(BinarySearchTree *tree,
 static bool lookup_by_node(const NodeBST *root,
                            const char *key,
                            void **value);
-static int max_descendent(const NodeBST *root,
+static int max_descendent(NodeBST *root,
                           NodeBST **max_addr,
                           NodeBST **max_parent_addr);
 static void free_node(NodeBST *node);
@@ -245,7 +245,7 @@ static bool lookup_by_node(const NodeBST *root,
    and it's parent in max_parent_addr.
    On failure, return 1.
 */
-static int max_descendent(const NodeBST *root,
+static int max_descendent(NodeBST *root,
                           NodeBST **max_addr,
                           NodeBST **max_parent_addr) {
   if (root == NULL)

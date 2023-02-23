@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
     /* Change process credentials uids changed last
        to maintain privilege */
 
-    num_groups = get_user_groups(username, &grouplist);
+    num_groups = get_user_groups(username, grouplist);
     
     if (setgroups(num_groups, grouplist) == -1)
         errExit("setgroups");

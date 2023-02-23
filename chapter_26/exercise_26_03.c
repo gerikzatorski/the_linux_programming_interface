@@ -64,7 +64,7 @@ main(int argc, char *argv[])
     default:            /* Parent: repeatedly wait on child until it
                            either exits or is terminated by a signal */
         for (;;) {
-            if (waitid(P_ALL, NULL, &info, WEXITED | WSTOPPED
+            if (waitid(P_ALL, -1, &info, WEXITED | WSTOPPED
 #ifdef WCONTINUED       /* Not present on older versions of Linux */
                                                 | WCONTINUED
 #endif

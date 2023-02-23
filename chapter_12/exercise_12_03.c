@@ -18,6 +18,7 @@ use of readlink(), described in Section 18.5.
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
+#include <unistd.h>
 
 int print_proc_if_file_open(pid_t pid, char *filename)
 {

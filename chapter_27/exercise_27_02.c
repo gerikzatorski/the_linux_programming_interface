@@ -14,6 +14,7 @@ and is executable is simply to try execing the file.
 #include <string.h>
 #include <stdio.h>
 #include <limits.h>
+#include <unistd.h>
 
 #define PATH_DELIM ":"
 #define MAX_DIRS 100

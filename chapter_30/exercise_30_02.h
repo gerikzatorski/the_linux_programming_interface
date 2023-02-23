@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define KEY_MAX 127
 

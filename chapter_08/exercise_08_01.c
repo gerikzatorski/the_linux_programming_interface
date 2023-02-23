@@ -13,6 +13,7 @@ Note: Using the provided code led to unintended results - the numbers displayed 
 
 #include <pwd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int main(int argc, char *argv[])
 {

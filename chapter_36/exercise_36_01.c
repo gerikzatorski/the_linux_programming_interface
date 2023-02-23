@@ -10,6 +10,7 @@ before and after calling wait().)
 
 #include <sys/resource.h>
 #include <signal.h>
+#include <sys/wait.h>
 #include "tlpi_hdr.h"
 
 #define SYNC_SIG SIGUSR1

@@ -9,6 +9,7 @@ would use this program as follows:
 *********************************************************************/
 
 #include <sys/resource.h>
+#include <sys/wait.h>
 #include "tlpi_hdr.h"
 
 static void print_timeval(const char *pre, const struct timeval *t)

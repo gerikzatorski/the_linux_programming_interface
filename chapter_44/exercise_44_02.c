@@ -19,6 +19,7 @@ streams created by earlier calls to popen() must be closed in the new
 child process.
 *********************************************************************/
 
+#include <sys/wait.h>
 #include "tlpi_hdr.h"
 
 #define SHELL ("/bin/sh")

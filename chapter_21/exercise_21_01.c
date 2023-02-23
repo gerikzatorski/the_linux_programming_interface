@@ -19,7 +19,7 @@ void abortcopy(void)
     
     /* Override the effect of blocking  */
     
-    if (sigprocmask(SIG_UNBLOCK, &set, &act) == -1) {
+    if (sigprocmask(SIG_UNBLOCK, &set, NULL) == -1) {
         perror("sigprocmask");
         exit(EXIT_FAILURE);
     }
@@ -39,7 +39,7 @@ void abortcopy(void)
     
     /* Reset handling of SIGABRT if reached here */
 
-    act.sa_sigaction = SIG_DFL;
+    act.sa_handler = SIG_DFL;
 
     if (sigaction(SIGABRT, &act, NULL) == -1) {
         perror("sigaction");

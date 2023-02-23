@@ -36,9 +36,9 @@ static void *thread_func(void *arg)
 
   for (sig = 1; sig < NSIG; sig++)
     if (sigismember(&pending_set, sig))
-      printf("Pending in thread %ul:\t%d (%s)\n", pthread_self(), sig, strsignal(sig));
+      printf("Pending in thread %lu:\t%d (%s)\n", pthread_self(), sig, strsignal(sig));
 
-  return;
+  return NULL;
 }
 
 int main(int argc, char *argv[])

@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         case 0:
             /* Child: wait for a few seconds for parent to terminate */
-            printf("Child pid is %d\n", getpid());
+            printf("Child pid is %ld\n", (long) getpid());
             sleep(3);
             printf("Child getppid = %ld\n", (long) getppid());
             _exit(EXIT_SUCCESS);
@@ -37,13 +37,13 @@ int main(int argc, char *argv[])
             break;
         }
         /* Parent: exits immediately to assume zombie role */
-        printf("Parent pid is %d\n", (long) getpid());
+        printf("Parent pid is %ld\n", (long) getpid());
         _exit(EXIT_SUCCESS);
     default:
         break;
     }
     /* Grandparent: doesn't wait for Parent */
-    printf("Grandparent pid is %d\n", (long) getpid());
+    printf("Grandparent pid is %ld\n", (long) getpid());
 
     for (;;) {
         /* Terminate process with signal */
