@@ -15,7 +15,6 @@ typedef struct node_bst NodeBST;
 
 struct binary_search_tree {
   NodeBST *root;
-  pthread_mutex_t *mtx;
 };
 
 struct node_bst {
@@ -23,6 +22,7 @@ struct node_bst {
   void *value;
   NodeBST *left;
   NodeBST *right;
+  pthread_mutex_t *mtx;
 };
 
 /* Library API */

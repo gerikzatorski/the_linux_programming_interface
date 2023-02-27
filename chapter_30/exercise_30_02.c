@@ -16,11 +16,10 @@ purpose). Each element of the tree holds a key-value pair. You will
 also need to define the structure for each element to include a mutex
 that protects that element so that only one thread at a time can
 access it. The initialize(), add(), and lookup() functions are
-relatively simple to imple- ment. The delete() operation requires a
+relatively simple to implement. The delete() operation requires a
 little more effort.
 
-TODO: More granular parallelism. Currently implemented coarse mutex on
-BinarySearchTree struct. See add(), delete(), and lookup().
+TODO: handle errors for mutex functions.
 *********************************************************************/
 
 #include "exercise_30_02.h"
@@ -43,24 +42,13 @@ static void free_node(NodeBST *node);
 /* Library API  */
 
 int initialize(BinarySearchTree *tree) {
-  int s;
-  
   tree->root = NULL;
-  tree->mtx = malloc(sizeof(pthread_mutex_t));
-  if (tree->mtx == NULL) {
-    free(tree);
-    return -1;
-  }
-
-  s = pthread_mutex_init(tree->mtx, NULL);
-  if (s != 0)
-    return s;
-  
   return 0;
 }
 
 int add(BinarySearchTree *tree, char *key, void *value) {
   NodeBST *new_node;
+  int s;
   
   /* Allocate memory for node and its members */
 
@@ -73,6 +61,18 @@ int add(BinarySearchTree *tree, char *key, void *value) {
     free(new_node);
     return -1;
   }
+
+  new_node->mtx = malloc(sizeof(pthread_mutex_t));
+  if (new_node->mtx == NULL) {
+    free(new_node);
+    return -1;
+  }
+
+  /* Initialize node mutex */
+
+  s = pthread_mutex_init(new_node->mtx, NULL);
+  if (s != 0)
+    return s;
 
   /* Set member values */
 
@@ -88,26 +88,22 @@ int add(BinarySearchTree *tree, char *key, void *value) {
     return 0;
   }
 
-  pthread_mutex_lock(tree->mtx);
+  pthread_mutex_lock(tree->root->mtx);
   add_by_node(tree->root, new_node);
-  pthread_mutex_unlock(tree->mtx);
-
   return 0;
 }
 
 int delete(BinarySearchTree *tree, char *key) {
   int res;
-  pthread_mutex_lock(tree->mtx);
+  pthread_mutex_lock(tree->root->mtx);
   res = delete_by_node(tree, tree->root, key, NULL);
-  pthread_mutex_unlock(tree->mtx);
   return res;
 }
 
 bool lookup(BinarySearchTree *tree, char *key, void **value) {
   bool res;
-  pthread_mutex_lock(tree->mtx);
+  pthread_mutex_lock(tree->root->mtx);
   res = lookup_by_node(tree->root, key, value);
-  pthread_mutex_unlock(tree->mtx);
   return res;
 }
 
@@ -117,18 +113,27 @@ bool lookup(BinarySearchTree *tree, char *key, void **value) {
    Recursive function to insert new node below root.
 */
 static void add_by_node(NodeBST *root, NodeBST *new_node) {
-  /* Assumed that root is not NULL */
-
   if (strcmp(new_node->key, root->key) < 0) {
-    if (root->left)
+    if (root->left) {
+      pthread_mutex_lock(root->left->mtx);
+      pthread_mutex_unlock(root->mtx);
       add_by_node(root->left, new_node);
-    else
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
       root->left = new_node;
-  } else {
-    if (root->right)
+    }
+  }
+  else {
+    if (root->right) {
+      pthread_mutex_lock(root->right->mtx);
+      pthread_mutex_unlock(root->mtx);
       add_by_node(root->right, new_node);
-    else
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
       root->right = new_node;
+    }
   }
     
   return;
@@ -144,16 +149,32 @@ static int delete_by_node(BinarySearchTree *tree,
                           NodeBST *parent) {
   int s;
 
-  if (root == NULL) {
-    return 0;
-  }
-
   /* Recursive paths left and right */
 
-  if (strcmp(key, root->key) < 0)
-    return delete_by_node(tree, root->left, key, root);
-  if (strcmp(key, root->key) > 0)
-    return delete_by_node(tree, root->right, key, root);
+  if (strcmp(key, root->key) < 0) {
+    if (root->left) {
+      pthread_mutex_lock(root->left->mtx);
+      if (parent) pthread_mutex_unlock(parent->mtx);
+      return delete_by_node(tree, root->left, key, root);
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
+      if (parent) pthread_mutex_unlock(parent->mtx);
+      return 0;
+    }
+  }
+  if (strcmp(key, root->key) > 0) {
+    if (root->right) {
+      pthread_mutex_lock(root->right->mtx);
+      if (parent) pthread_mutex_unlock(parent->mtx);
+      return delete_by_node(tree, root->right, key, root);
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
+      if (parent) pthread_mutex_unlock(parent->mtx);
+      return 0;
+    }
+  }
 
   if (root->left == NULL && root->right == NULL) {  /* No children */
 
@@ -205,14 +226,16 @@ static int delete_by_node(BinarySearchTree *tree,
 
     /* Redirect parent of deleted node */
 
-    if (parent == NULL) {
+    if (parent == NULL)
       tree->root = *child_addr;
-    } else if (root == parent->right) {
+    else if (root == parent->right)
       parent->right = *child_addr;
-    } else {
+    else
       parent->left = *child_addr;
-    }
   }
+
+  pthread_mutex_unlock(root->mtx);
+  if (parent) pthread_mutex_unlock(parent->mtx);
   return 1;
 }
 
@@ -224,19 +247,34 @@ static int delete_by_node(BinarySearchTree *tree,
 static bool lookup_by_node(const NodeBST *root,
                            const char *key,
                            void **value) {
-  if (root == NULL)
-    return false;
-
   /* Recursive paths left and right */
 
-  if (strcmp(key, root->key) < 0)
-    return lookup_by_node(root->left, key, value);
-  if (strcmp(key, root->key) > 0)
-    return lookup_by_node(root->right, key, value);
+  if (strcmp(key, root->key) < 0) {
+    if (root->left) {
+      pthread_mutex_lock(root->left->mtx);
+      pthread_mutex_unlock(root->mtx);
+      return lookup_by_node(root->left, key, value);
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
+      return false;
+    }
+  }
+  if (strcmp(key, root->key) > 0) {
+    if (root->right) {
+      pthread_mutex_lock(root->right->mtx);
+      pthread_mutex_unlock(root->mtx);
+      return lookup_by_node(root->right, key, value);
+    }
+    else {
+      pthread_mutex_unlock(root->mtx);
+      return false;
+    }
+  }
 
   (*value) = root->value;
+  pthread_mutex_unlock(root->mtx);
   return true;
-
 }
 
 /*
