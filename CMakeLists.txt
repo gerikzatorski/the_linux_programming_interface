@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.10)
 # Use default C compiler
 project(tlpi_exercises C)
 
+# enable CTest testing
+enable_testing()
+
 # Need TLPI handers and lib (ex. error functions)
 file(GLOB TLPI_SRCS lib/*.c)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -100,6 +103,7 @@ add_library(exercise_30_02_lib STATIC chapter_30/exercise_30_02.c)
 target_link_libraries(exercise_30_02_lib PRIVATE pthread)
 add_executable(exercise_30_02_tests chapter_30/exercise_30_02_tests.c)
 target_link_libraries(exercise_30_02_tests PRIVATE pthread exercise_30_02_lib)
+add_test(test_30_02 exercise_30_02_tests)
 
 add_executable(exercise_31_01 chapter_31/exercise_31_01.c)
 target_link_libraries(exercise_31_01 PRIVATE pthread)
